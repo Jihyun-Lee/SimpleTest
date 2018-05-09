@@ -31,6 +31,14 @@ dependencies {
     implementation 'com.koushikdutta.async:androidasync:2.1.5'
     implementation 'com.google.firebase:firebase-core:11.8.0'
     implementation 'com.google.firebase:firebase-auth:11.8.0'
+    implementation 'com.google.firebase:firebase-database:11.8.0'
+
+    implementation 'com.firebaseui:firebase-ui:3.3.0'
+    implementation 'com.firebaseui:firebase-ui-auth:3.3.1'
+    implementation 'com.firebaseui:firebase-ui-database:3.3.1'
+
+
+
 }
 
 
