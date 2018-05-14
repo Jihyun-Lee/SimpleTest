@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,6 +26,8 @@ import com.google.firebase.database.Query;
 
 
 public class ChatActivity extends AppCompatActivity {
+
+
 
 
     @Override
@@ -75,6 +76,7 @@ public class ChatActivity extends AppCompatActivity {
                                         .getDisplayName())
                         );
 
+
                 // Clear the input
                 input.setText("");
             }
@@ -101,39 +103,38 @@ public class ChatActivity extends AppCompatActivity {
             }
         }
     }
-    private FirebaseListAdapter<ChatMessage> adapter;
+    private FirebaseListAdapter<ChatMessage> mAdapter;
+
     private void displayChatMessages() {
 
 
+        ListView listOfMessages = (ListView)findViewById(R.id.list_of_messages);
+        Query query = FirebaseDatabase.getInstance()
+                .getReference();
+        FirebaseListOptions<ChatMessage> options = new FirebaseListOptions.Builder<ChatMessage>()
+                .setLayout( R.layout.message)//Note: The guide doesn't mention this method, without it an exception is thrown that the layout has to be set.
+                .setQuery(query, ChatMessage.class)
+                .build();
 
-        Query query = FirebaseDatabase.getInstance().getReference();
-
-        FirebaseListOptions<ChatMessage> options =
-                new FirebaseListOptions.Builder<ChatMessage>()
-                        .setLayout(android.R.layout.simple_list_item_1)
-                        .setQuery(query, ChatMessage.class)
-                        .build();
-
-        adapter = new FirebaseListAdapter<ChatMessage>(options){
+        mAdapter = new FirebaseListAdapter<ChatMessage>(options) {
             @Override
             protected void populateView(View v, ChatMessage model, int position) {
                 // Get references to the views of message.xml
                 TextView messageText = (TextView)v.findViewById(R.id.message_text);
+                TextView messageUser = (TextView)v.findViewById(R.id.message_user);
                 TextView messageTime = (TextView)v.findViewById(R.id.message_time);
 
-                Log.d("easy","text : "+ model.getMessageText());
-                Log.d("easy","time : "+ model.getMessageTime());
                 // Set their text
                 messageText.setText(model.getMessageText());
-                // Format the date before showing it
-                messageTime.setText(DateFormat.format("dd-MM-yyyy (HH:mm:ss)", model.getMessageTime()));
+                messageUser.setText(model.getMessageUser());
 
+                // Format the date before showing it
+                messageTime.setText(DateFormat.format("dd-MM-yyyy (HH:mm:ss)",
+                        model.getMessageTime()));
             }
         };
 
-
-        ListView listOfMessages = (ListView)findViewById(R.id.list_of_messages);
-        listOfMessages.setAdapter(adapter);
+        listOfMessages.setAdapter(mAdapter);
 
     }
 
@@ -162,14 +163,5 @@ public class ChatActivity extends AppCompatActivity {
         return true;
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        adapter.startListening();
-    }
-    @Override
-    protected void onStop() {
-        super.onStop();
-        adapter.stopListening();
-    }
+
 }
