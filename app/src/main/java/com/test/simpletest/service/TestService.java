@@ -61,6 +61,11 @@ public class TestService extends Service {
 
     };
 
-
+    private void goo(){
+        return;
+    }
+    private void foo(){
+        goo();
+    }
 
 }
