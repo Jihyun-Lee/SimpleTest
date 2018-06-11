@@ -14,7 +14,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.test.simpletest.service.TestService;
 import com.test.simpletest.thread.TestThread;
@@ -25,10 +24,7 @@ public class MainActivity extends AppCompatActivity {
     ITestAidlCallBack.Stub callback = new ITestAidlCallBack.Stub() {
         @Override
         public void CallActivityByService() throws RemoteException {
-            Toast.makeText(getApplicationContext(),
-                    "CallActivityByService!!",
-                    Toast.LENGTH_LONG)
-                    .show();
+            SimpleTestApplication.showToast("CallActivityByService");
             Log.d(TAG, "CallActivityByService");
 
         }
@@ -40,10 +36,7 @@ public class MainActivity extends AppCompatActivity {
         public void handleMessage(Message msg) {
 
             if(msg.what == 10) {
-                Toast.makeText(getApplicationContext(),
-                        "Hi" + msg.what,
-                        Toast.LENGTH_LONG)
-                        .show();
+                SimpleTestApplication.showToast("Hi");
                 mTxt1.setText("hi");
             }
 
