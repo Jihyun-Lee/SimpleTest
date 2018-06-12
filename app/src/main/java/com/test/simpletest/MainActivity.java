@@ -20,6 +20,16 @@ import com.test.simpletest.thread.TestThread;
 
 public class MainActivity extends AppCompatActivity {
 
+
+    static {
+        System.loadLibrary("jnitest");
+    }
+
+    public native String getJNIString();
+    public native int getJNIInt();
+    public native int java_add(int a, int b);
+    public native int java_mul(int a, int b);
+
     static final String TAG = "hello";
     ITestAidlCallBack.Stub callback = new ITestAidlCallBack.Stub() {
         @Override
@@ -84,11 +94,18 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Log.d(TAG, "click");
 
+
+                Log.d(TAG, "getJNIInt : " + getJNIInt());
+                Log.d(TAG, "getJNIString : " + getJNIString());
+                Log.d(TAG, "java_add : " + java_add(10,10));
+                Log.d(TAG, "java_mul : " + java_mul(10,10));
+
                 try {
                     stub.foo();
                 } catch (RemoteException e) {
                     e.printStackTrace();
                 }
+
             }
         });
         btn2.setOnClickListener(new View.OnClickListener() {
@@ -113,17 +130,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
         /* Start ChatActivity
         startActivity(new Intent(this, ChatActivity.class));
-         */
-
-        //Intent serviceIntent = new Intent(this, TestService.class);
+        Intent serviceIntent = new Intent(this, TestService.class);
+        */
 
         Intent intent = new Intent(MainActivity.this, TestService.class);
         bindService(intent, connection, Context.BIND_AUTO_CREATE);
-
 
 
     }
