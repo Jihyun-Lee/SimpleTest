@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     public native int getJNIInt();
     public native int java_add(int a, int b);
     public native int java_mul(int a, int b);
+    public native int getIntFromTestSo();
 
     static final String TAG = "hello";
     ITestAidlCallBack.Stub callback = new ITestAidlCallBack.Stub() {
@@ -95,10 +96,13 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "click");
 
 
-                Log.d(TAG, "getJNIInt : " + getJNIInt());
+                /*Log.d(TAG, "getJNIInt : " + getJNIInt());
                 Log.d(TAG, "getJNIString : " + getJNIString());
                 Log.d(TAG, "java_add : " + java_add(10,10));
-                Log.d(TAG, "java_mul : " + java_mul(10,10));
+                Log.d(TAG, "java_mul : " + java_mul(10,10));*/
+                Log.d(TAG, "getIntFromTestSo : " + getIntFromTestSo());
+
+
 
                 try {
                     stub.foo();

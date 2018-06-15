@@ -5,6 +5,7 @@
 //#include "com_test_simpletest_MainActivity.h"
 #include <jni.h>
 #include "log.h"
+#include <testjni.h>
 #define LOG_TAG "easy"
 
 extern jint add(    JNIEnv *env,    jobject thiz,    jint    a,    jint    b );
@@ -18,13 +19,15 @@ JNIEXPORT jstring JNICALL Java_com_test_simpletest_MainActivity_getJNIString(JNI
 JNIEXPORT jint JNICALL Java_com_test_simpletest_MainActivity_getJNIInt(JNIEnv *env, jobject obj) {
     return 9999;
 }
-
+JNIEXPORT jint JNICALL testFromNative(JNIEnv *env, jobject obj) {
+    return test_int();
+}
 static JNINativeMethod methodTable[] = {
   {"java_mul", "(II)I", (void *) mul},
   {"java_add", "(II)I", (void *) add},
   {"getJNIString","()Ljava/lang/String;", (void *) Java_com_test_simpletest_MainActivity_getJNIString},
   {"getJNIInt", "()I", (void *) Java_com_test_simpletest_MainActivity_getJNIInt},
-
+  {"getIntFromTestSo", "()I", (void *) testFromNative},
 
 };
 
@@ -54,3 +57,4 @@ jint JNI_OnLoad(JavaVM* aVm, void* aReserved)
 
     return JNI_VERSION_1_6;
 }
+
