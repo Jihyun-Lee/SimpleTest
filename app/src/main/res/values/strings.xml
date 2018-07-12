@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">SimpleTest</string>
+    <string name="app_label">Test label</string>
+    <string name="search_hint">Do your search</string>
+    <string name="valueSelector_label">VALUE</string>
+    <string name="valueBarLabel">CURRENT VALUE</string>
 </resources>
