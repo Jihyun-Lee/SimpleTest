@@ -59,7 +59,27 @@
 
 
         </com.test.simpletest.customview.ValueSelector>
-
+        <com.test.simpletest.customview.ValueBar
+            android:id="@+id/valueBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/value_bar_padding_top"
+            android:paddingLeft="@dimen/value_bar_padding_horizontal"
+            android:paddingRight="@dimen/value_bar_padding_horizontal"
+            android:focusable="true"
+            app:barHeight="@dimen/value_bar_barHeight"
+            app:baseColor="@color/navy"
+            app:circleRadius="@dimen/value_bar_circleRadius"
+            app:spaceAfterBar="@dimen/value_bar_spaceAfterBar"
+            app:circleTextColor="@color/white"
+            app:circleTextSize="@dimen/value_bar_circleTextSize"
+            app:fillColor="@color/red"
+            app:labelText="@string/valueBarLabel"
+            app:labelTextColor="@color/navy"
+            app:labelTextSize="@dimen/value_bar_labelTextSize"
+            app:maxValueTextColor="@color/navy"
+            app:maxValueTextSize="@dimen/value_bar_maxValueTextSize"
+            />
 
     </LinearLayout>
 
