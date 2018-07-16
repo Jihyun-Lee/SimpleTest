@@ -36,6 +36,20 @@
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
         </activity>
+        <activity android:name=".FragmentActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".IntentActivity">
+        <intent-filter>
+            <action android:name="android.intent.action.VIEW" />
+            <action android:name="com.test.simpletest.SEARCH" />
+
+        </intent-filter>
+    </activity>
+
+
         <service android:name=".service.TestService"
             android:exported="true">
 

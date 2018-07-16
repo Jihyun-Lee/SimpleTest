@@ -105,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         Button btn = (Button) findViewById(R.id.btn);
         Button btn2 = (Button) findViewById(R.id.btn2);
@@ -143,9 +144,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "click");
-                Message msg = Message.obtain();
+                /*Message msg = Message.obtain();
                 msg.what=1;
-                mHandler.sendMessage(msg);
+                mHandler.sendMessage(msg);*/
+
+
+                startActivity(getCustomIntent());
+
             }
         });
         btn3.setOnClickListener(new View.OnClickListener() {
@@ -183,6 +188,20 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, TestService.class);
         bindService(intent, connection, Context.BIND_AUTO_CREATE);
 
+
+    }
+
+
+    private Intent getCustomIntent(){
+        final String START_INTENT = "com.test.simpletest.SEARCH";
+        final String ACTIVITY_NAME = "com.test.simpletest.IntentActivity";
+        final String HOME_PACKAGE_NAME = "com.test.simpletest";
+        Intent intent = new Intent(START_INTENT);
+        ComponentName name = new ComponentName(HOME_PACKAGE_NAME, ACTIVITY_NAME);
+        intent.setComponent(name);
+        /*intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);*/
+        return intent;
     }
 
     @Override
