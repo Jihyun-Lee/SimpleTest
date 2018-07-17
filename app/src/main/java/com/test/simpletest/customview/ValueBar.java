@@ -152,6 +152,8 @@ public class ValueBar extends View {
 
         setSaveEnabled(true);
         setAnimated(true);
+
+
     }
 
     @Override
@@ -159,11 +161,12 @@ public class ValueBar extends View {
 
         if ( keyCode == KEYCODE_DPAD_LEFT){
             setValue(currentValue-10);
-
+            return true;
         } else if ( keyCode == KEYCODE_DPAD_RIGHT){
             setValue(currentValue+10);
+            return true;
         }
-        return true;
+        return false;
     }
 
     @Override
@@ -177,6 +180,18 @@ public class ValueBar extends View {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         //super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         setMeasuredDimension(measureWidth(widthMeasureSpec),measureHeight(heightMeasureSpec));
+
+    }
+
+    @Override
+    protected void onFocusChanged(boolean gainFocus, int direction, @Nullable Rect previouslyFocusedRect) {
+        super.onFocusChanged(gainFocus, direction, previouslyFocusedRect);
+        Log.d("hello", "gainFocus = "+gainFocus);
+        if ( gainFocus )
+            circlePaint.setColor(Color.BLUE);
+        else
+            circlePaint.setColor(fillColor);
+
 
     }
 

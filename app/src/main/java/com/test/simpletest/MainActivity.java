@@ -8,7 +8,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.content.pm.ActivityInfo;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -24,6 +23,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.test.simpletest.designe_pattern.factory_pattern.Shape;
+import com.test.simpletest.designe_pattern.factory_pattern.ShapeFactory;
 import com.test.simpletest.service.TestService;
 import com.test.simpletest.thread.TestThread;
 
@@ -117,11 +118,20 @@ public class MainActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG, "click");
+
+                ShapeFactory shapeFactory= new ShapeFactory();
+                Shape a =shapeFactory.getShape("circle");
+                a.draw();
+                a=shapeFactory.getShape("rectangle");
+                a.draw();
+                a=shapeFactory.getShape("square");
+                a.draw();
+
+               /* Log.d(TAG, "click");
                 if ( getRequestedOrientation() ==ActivityInfo.SCREEN_ORIENTATION_PORTRAIT )
                     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
                 else
-                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);*/
 
 
                 /*Log.d(TAG, "getJNIInt : " + getJNIInt());
